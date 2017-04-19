@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileInputStream;
 /**
- * Created by Leonard on 2017-04-11.
+ * Created by Leonard Halling & Filip Hildebrandt on 2017-04-11.
  */
 public class GraphColoring {
 
@@ -48,6 +48,7 @@ public class GraphColoring {
             }
         }
         v = v - count;
+        v++;
     }
 
     private void makeTrans(){
@@ -61,17 +62,50 @@ public class GraphColoring {
         }
     }
 
+    private void baseCase(){
+        System.out.println(3);
+        System.out.println(2);
+        System.out.println(3);
+        System.out.println(3 + " " + 1 + " " + 2 + " " + 3);
+        System.out.println(3 + " " + 1 + " " + 2 + " " + 3);
+        System.out.println(3 + " " + 1 + " " + 2 + " " + 3);
+        System.out.println(2 + " " + 1 + " " + 3 );
+        System.out.println(2 + " " + 2 + " " + 3 );
+    }
+
     GraphColoring(){
         // init variables and arrays
         sc = new Scanner(System.in);
         v = sc.nextInt();
         e = sc.nextInt();
         col = sc.nextInt() + 1;
-//        edgeList = new ArrayList<>();
+
+        /*if (e == (v*(v-1)/2)){
+
+            System.out.println(3);
+            System.out.println(2);
+            System.out.println(3);
+            System.out.println(3 + " " + 1 + " " + 2 + " " + 3);
+            System.out.println(3 + " " + 1 + " " + 2 + " " + 3);
+            System.out.println(3 + " " + 1 + " " + 2 + " " + 3);
+            System.out.println(2 + " " + 1 + " " + 3 );
+            System.out.println(2 + " " + 2 + " " + 3 );
+            return;
+        }*/
 
         checkIsolated();
         makeTrans();
         // Cast actors for roles
+        /*if (v < 3){
+            v = 3;
+        }*/
+        if (e == 0){
+            baseCase();
+            return;
+        }
+
+
+
         sb = new StringBuilder();
         String[] rollList = new String[v];
         for (int i = 0; i < v; i++) {
@@ -84,7 +118,8 @@ public class GraphColoring {
         }
 
         // print first three integers
-        System.out.println(v+"\n"+e+"\n"+col);
+
+        System.out.println(v+"\n"+(e+1)+"\n"+col);
 
 
         // print casted actors in roles
@@ -93,11 +128,13 @@ public class GraphColoring {
         }
 
         // print scenes
+        int test = 1;
         for (int[] s : sceneList){
-//            System.out.println(transList[s[0]-1] + ""+ transList[s[1]-1]);
             String row = 2 + " " + transList[s[0] - 1] + " "+ transList[s[1] - 1];
             System.out.println(row);
+            test = transList[s[1] - 1];
         }
+        System.out.println(2 + " " + test + " "+ v);
     }
 
 
@@ -107,5 +144,4 @@ public class GraphColoring {
 
         GraphColoring gc = new GraphColoring();
     }
-
 }
