@@ -95,6 +95,9 @@ public class GraphColoring {
 
         checkIsolated();
         makeTrans();
+        if (col > v){
+            col = v;
+        }
         // Cast actors for roles
         /*if (v < 3){
             v = 3;
